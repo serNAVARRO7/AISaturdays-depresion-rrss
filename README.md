@@ -19,3 +19,6 @@ Publicación en la que se basa la idea del proyecto: [enlace](https://openaccess
  - Ana Patricia Bautista
  - Sergio Hernando
  - Sergio Navarro
+ 
+ ## Planning 
+[enlace](https://docs.google.com/spreadsheets/d/18FCTqPB3jZHNGhPPGIMsuiDSaqBj1YsWza4AiPS8J2w/edit?usp=sharing)
