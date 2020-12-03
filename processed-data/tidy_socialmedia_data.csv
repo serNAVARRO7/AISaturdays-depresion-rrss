@@ -1,4 +1,4 @@
-,Participant,Date,Day,Time,Session.Name,Notification.No,LifePak.Download.No,Responded,Completed.Session,Session.Instance,Session.Instance.Response.Lapse,Reminders.Delivered,Fatigue,DeprMood,Loneliness,Concentrat,LossOfInt,Inferior,Hopeless,Stress,PSMU,News,Active,full_count
+,Participant,Date,Day,Time,Session.Name,Notification.No,LifePak.Download.No,Responded,Completed.Session,Session.Instance,Session.Instance.Response.Lapse,Reminders.Delivered,Fatigue,LowMood,Loneliness,Concentrat,LossOfInt,Inferior,Hopeless,Stress,PSMU,News,ASMU,full_count
 1,115091,2017-05-02,Tuesday,10:00:06,Daily questions,1,1,1,1,1.0,00:00:06,0,61.0,55.0,61.0,64.0,68.0,50.0,56.0,73.0,66.0,39.0,38.0,10
 2,115091,2017-05-02,Tuesday,12:02:48,Daily questions,2,1,1,1,2.0,00:02:48,0,28.0,59.0,57.0,70.0,58.0,37.0,56.0,67.0,0.0,27.0,23.0,10
 3,115091,2017-05-02,Tuesday,14:03:02,Daily questions,3,1,1,1,3.0,00:03:02,0,24.0,20.0,44.0,70.0,67.0,26.0,38.0,39.0,63.0,34.0,36.0,10
