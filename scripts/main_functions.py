@@ -25,12 +25,11 @@ def printPearsonCorrelations(data):
 	corr = data.corr()
 	plt.figure(figsize = (10,10))
 	cmap = sns.diverging_palette(220, 10, as_cmap=True)
-	sns.heatmap(corr, xticklabels=corr.columns.values, yticklabels=corr.columns.values, cmap=cmap, vmax=1, vmin=-1,center=0, square=True, 		linewidths=.5, cbar_kws={"shrink": .82})
-	plt.title('Heatmap of Correlation Matrix - Medians by Participant')
+	sns.heatmap(corr, xticklabels=corr.columns.values, yticklabels=corr.columns.values, annot=True, cmap=cmap, vmax=1, vmin=-1,center=0, square=True, 		linewidths=.5, cbar_kws={"shrink": .82})
+	plt.title('Heatmap of Correlation Matrix')
 	plt.show()
-	print(corr)
 
-def calculateRegression(data,label,resultsummary):
+def calculateRegression(data,label,resultsummary,alpha):
 	X_train, X_test, y_train, y_test = train_test_split(data, label, test_size = 0.2, random_state = 50)
 	reg = LinearRegression() # Create the Linear Regression estimator
 	result=reg.fit (X_train, y_train)  # Perform the fitting
@@ -44,15 +43,15 @@ def calculateRegression(data,label,resultsummary):
 	RMSE_Testing = np.sqrt(np.mean((reg.predict(X_test) - y_test)**2))
 	R2_Training = reg.score(X_train, y_train)
 	R2_Testing = reg.score(X_test, y_test)
-	iteration = resultsummary['iteration'].max()
-	if(np.isnan(iteration)):
-		iteration=0
-	else:
-		iteration = iteration+1
-	print("iteration")
-	print(iteration)
-	print(p_values)
-	if(p_values[p_value_max] > 0.1):
+	# iteration = resultsummary['iteration'].max()
+	# if(np.isnan(iteration)):
+	# 	iteration=0
+	# else:
+	# 	iteration = iteration+1
+	# print("iteration")
+	# print(iteration)
+	# print(p_values)
+	if(p_values[p_value_max] > alpha):
 		data.drop(p_value_max, axis=1, inplace=True)
 		iteration = resultsummary['iteration'].max()
 		if(np.isnan(iteration)):
@@ -63,7 +62,7 @@ def calculateRegression(data,label,resultsummary):
 		'R2_Training':R2_Training,'R2_Testing':R2_Testing,'p_value_max':p_values[p_value_max],'removed_var':p_value_max}
 		resultsummary = resultsummary.append(newrow,ignore_index=True)
 
-		calculateRegression(data,label,resultsummary)
+		calculateRegression(data,label,resultsummary, alpha)
 	else:
 		iteration = resultsummary['iteration'].max()+1
 		newrow ={'iteration': iteration, 'intercept':reg.intercept_ , 'RMSE_Training': RMSE_Training,'RMSE_Testing':RMSE_Testing,
@@ -72,4 +71,11 @@ def calculateRegression(data,label,resultsummary):
 		resultsummary = resultsummary.round(3)
 		print(resultsummary.head(20))
 		print()
+		print("Modelo Final")
+		print(list(data.columns))
 		print(reg.coef_,reg.intercept_)
+
+		influence = fitt.get_influence()
+		standardized_residuals = influence.resid_studentized_internal
+		studentized_residuals = influence.resid_studentized_external
+		return(X_train, X_test, y_train, y_test)
