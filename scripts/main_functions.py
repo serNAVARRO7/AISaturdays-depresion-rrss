@@ -75,6 +75,7 @@ def calculateRegression(data,label,resultsummary,alpha):
 		print(list(data.columns))
 		print(reg.coef_,reg.intercept_)
 
+	#Analisis de residuos
 	#influence = fitt.get_influence()
 	#standardized_residuals = influence.resid_studentized_internal
 	#studentized_residuals = influence.resid_studentized_external
