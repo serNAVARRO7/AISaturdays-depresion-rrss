@@ -75,7 +75,8 @@ def calculateRegression(data,label,resultsummary,alpha):
 		print(list(data.columns))
 		print(reg.coef_,reg.intercept_)
 
-		influence = fitt.get_influence()
-		standardized_residuals = influence.resid_studentized_internal
-		studentized_residuals = influence.resid_studentized_external
-		return(X_train, X_test, y_train, y_test)
+	#influence = fitt.get_influence()
+	#standardized_residuals = influence.resid_studentized_internal
+	#studentized_residuals = influence.resid_studentized_external
+	data_list=[X_train, X_test, y_train, y_test]
+	return data_list
