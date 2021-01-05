@@ -83,6 +83,7 @@ def calculateRegression(data,label,resultsummary,alpha):
 		print(reg.coef_,reg.intercept_)
 		print('R2 Coefficient for Linear Regression Model with Training Data: {0:.3f}'.format(reg.score(X_train, y_train)))
 		print('R2 Coefficient for Linear Regression Model with Testing Data: {0:.3f}'.format(reg.score(X_test, y_test)))
+<<<<<<< HEAD
 
 	data_list=[X_train, X_test, y_train, y_test, standardized_residuals, fitt, result]
 	return data_list
@@ -121,3 +122,8 @@ def repeatRegression(data,label,resultsummary):
 
 	data_list=[X_train, X_test, y_train, y_test, standardized_residuals, fitt, result]
 	return data_list
+=======
+		# prueba user
+	data_list=[X_train, X_test, y_train, y_test, standardized_residuals, fitt]
+	return data_list
+>>>>>>> 5858047ea53a0737f8e1ba96fdce80b00166acfc
