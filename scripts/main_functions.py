@@ -84,5 +84,40 @@ def calculateRegression(data,label,resultsummary,alpha):
 		print('R2 Coefficient for Linear Regression Model with Training Data: {0:.3f}'.format(reg.score(X_train, y_train)))
 		print('R2 Coefficient for Linear Regression Model with Testing Data: {0:.3f}'.format(reg.score(X_test, y_test)))
 
-	data_list=[X_train, X_test, y_train, y_test, standardized_residuals, fitt]
+	data_list=[X_train, X_test, y_train, y_test, standardized_residuals, fitt, result]
+	return data_list
+
+
+
+def repeatRegression(data,label,resultsummary):
+	X_train, X_test, y_train, y_test = train_test_split(data, label, test_size = 0.2, random_state = 50)
+	reg = LinearRegression() # Create the Linear Regression estimator
+	result=reg.fit (X_train, y_train)  # Perform the fitting
+
+	# P-values para decidir qué variables x son importantes para explicar y.
+	mod = sm.OLS(y_train,X_train)
+	fitt = mod.fit()
+	p_values = fitt.summary2().tables[1]['P>|t|']
+	RMSE_Training = np.sqrt(np.mean((reg.predict(X_train) - y_train)**2))
+	RMSE_Testing = np.sqrt(np.mean((reg.predict(X_test) - y_test)**2))
+	R2_Training = reg.score(X_train, y_train)
+	R2_Testing = reg.score(X_test, y_test)
+
+	influence = fitt.get_influence()
+	standardized_residuals = influence.resid_studentized_internal
+
+	iteration = 0
+	newrow = {'iteration': iteration, 'intercept': reg.intercept_, 'RMSE_Training': RMSE_Training,
+			  'RMSE_Testing': RMSE_Testing,
+			  'R2_Training': R2_Training, 'R2_Testing': R2_Testing
+			  }
+	resultsummary = resultsummary.append(newrow, ignore_index=True)
+	resultsummary = resultsummary.round(3)
+	print(resultsummary.head(1))
+	print()
+	print("Modelo Final Sin Outlier")
+	print(list(data.columns))
+	print(reg.coef_, reg.intercept_)
+
+	data_list=[X_train, X_test, y_train, y_test, standardized_residuals, fitt, result]
 	return data_list
