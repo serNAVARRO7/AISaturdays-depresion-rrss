@@ -43,6 +43,11 @@ def calculateRegression(data,label,resultsummary,alpha):
 	RMSE_Testing = np.sqrt(np.mean((reg.predict(X_test) - y_test)**2))
 	R2_Training = reg.score(X_train, y_train)
 	R2_Testing = reg.score(X_test, y_test)
+
+	influence = fitt.get_influence()
+	standardized_residuals = influence.resid_studentized_internal
+	# studentized_residuals = influence.resid_studentized_external
+
 	# iteration = resultsummary['iteration'].max()
 	# if(np.isnan(iteration)):
 	# 	iteration=0
@@ -51,6 +56,7 @@ def calculateRegression(data,label,resultsummary,alpha):
 	# print("iteration")
 	# print(iteration)
 	# print(p_values)
+
 	if(p_values[p_value_max] > alpha):
 		data.drop(p_value_max, axis=1, inplace=True)
 		iteration = resultsummary['iteration'].max()
@@ -63,6 +69,7 @@ def calculateRegression(data,label,resultsummary,alpha):
 		resultsummary = resultsummary.append(newrow,ignore_index=True)
 
 		calculateRegression(data,label,resultsummary, alpha)
+
 	else:
 		iteration = resultsummary['iteration'].max()+1
 		newrow ={'iteration': iteration, 'intercept':reg.intercept_ , 'RMSE_Training': RMSE_Training,'RMSE_Testing':RMSE_Testing,
@@ -79,4 +86,5 @@ def calculateRegression(data,label,resultsummary,alpha):
 	#standardized_residuals = influence.resid_studentized_internal
 	#studentized_residuals = influence.resid_studentized_external
 	data_list=[X_train, X_test, y_train, y_test]
+	return standardized_residuals
 	return data_list
