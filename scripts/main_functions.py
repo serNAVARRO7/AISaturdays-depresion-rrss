@@ -46,16 +46,7 @@ def calculateRegression(data,label,resultsummary,alpha):
 
 	influence = fitt.get_influence()
 	standardized_residuals = influence.resid_studentized_internal
-	# studentized_residuals = influence.resid_studentized_external
 
-	# iteration = resultsummary['iteration'].max()
-	# if(np.isnan(iteration)):
-	# 	iteration=0
-	# else:
-	# 	iteration = iteration+1
-	# print("iteration")
-	# print(iteration)
-	# print(p_values)
 
 	if(p_values[p_value_max] > alpha):
 		data.drop(p_value_max, axis=1, inplace=True)
@@ -68,7 +59,7 @@ def calculateRegression(data,label,resultsummary,alpha):
 		'R2_Training':R2_Training,'R2_Testing':R2_Testing,'p_value_max':p_values[p_value_max],'removed_var':p_value_max}
 		resultsummary = resultsummary.append(newrow,ignore_index=True)
 
-		calculateRegression(data,label,resultsummary, alpha)
+		data_list = calculateRegression(data,label,resultsummary, alpha)
 
 	else:
 		iteration = resultsummary['iteration'].max()+1
@@ -81,11 +72,11 @@ def calculateRegression(data,label,resultsummary,alpha):
 		print("Modelo Final")
 		print(list(data.columns))
 		print(reg.coef_,reg.intercept_)
+		X_train, X_test, y_train, y_test = train_test_split(data, label, test_size = 0.2, random_state = 50)
 		print('R2 Coefficient for Linear Regression Model with Training Data: {0:.3f}'.format(reg.score(X_train, y_train)))
 		print('R2 Coefficient for Linear Regression Model with Testing Data: {0:.3f}'.format(reg.score(X_test, y_test)))
-<<<<<<< HEAD
+		data_list=[X_train, X_test, y_train, y_test, standardized_residuals, fitt, result]
 
-	data_list=[X_train, X_test, y_train, y_test, standardized_residuals, fitt, result]
 	return data_list
 
 
@@ -120,10 +111,5 @@ def repeatRegression(data,label,resultsummary):
 	print(list(data.columns))
 	print(reg.coef_, reg.intercept_)
 
-	data_list=[X_train, X_test, y_train, y_test, standardized_residuals, fitt, result]
-	return data_list
-=======
-		# prueba user
 	data_list=[X_train, X_test, y_train, y_test, standardized_residuals, fitt]
 	return data_list
->>>>>>> 5858047ea53a0737f8e1ba96fdce80b00166acfc
