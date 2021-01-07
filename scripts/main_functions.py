@@ -73,16 +73,18 @@ def calculateRegression(data,label,resultsummary,alpha):
 		print(list(data.columns))
 		print(reg.coef_,reg.intercept_)
 		X_train, X_test, y_train, y_test = train_test_split(data, label, test_size = 0.2, random_state = 50)
+		print('RMSE of Linear Regression Model with Training Data: {0:.2f}'.format(np.sqrt(np.mean((reg.predict(X_train) - y_train) ** 2))))
+		print('RMSE of Linear Regression Model with Testing Data: {0:.2f}'.format(np.sqrt(np.mean((reg.predict(X_test) - y_test) ** 2))))
 		print('R2 Coefficient for Linear Regression Model with Training Data: {0:.3f}'.format(reg.score(X_train, y_train)))
 		print('R2 Coefficient for Linear Regression Model with Testing Data: {0:.3f}'.format(reg.score(X_test, y_test)))
-		data_list=[X_train, X_test, y_train, y_test, standardized_residuals, fitt, result]
+		data_list=[X_train, X_test, y_train, y_test, standardized_residuals, fitt]
 
 	return data_list
 
 
 
-def repeatRegression(data,label,resultsummary):
-	X_train, X_test, y_train, y_test = train_test_split(data, label, test_size = 0.2, random_state = 50)
+def repeatRegression(X_train,y_train, X_test, y_test, resultsummary):
+	#X_train, X_test, y_train, y_test = train_test_split(data, label, test_size = 0.2, random_state = 50)
 	reg = LinearRegression() # Create the Linear Regression estimator
 	result=reg.fit (X_train, y_train)  # Perform the fitting
 
@@ -101,15 +103,22 @@ def repeatRegression(data,label,resultsummary):
 	iteration = 0
 	newrow = {'iteration': iteration, 'intercept': reg.intercept_, 'RMSE_Training': RMSE_Training,
 			  'RMSE_Testing': RMSE_Testing,
-			  'R2_Training': R2_Training, 'R2_Testing': R2_Testing
+			  'R2_Training': R2_Training,
+			  'R2_Testing': R2_Testing
 			  }
 	resultsummary = resultsummary.append(newrow, ignore_index=True)
 	resultsummary = resultsummary.round(3)
 	print(resultsummary.head(1))
 	print()
 	print("Modelo Final Sin Outlier")
-	print(list(data.columns))
+	print(list(X_train.columns))
 	print(reg.coef_, reg.intercept_)
+	print('RMSE of Linear Regression Model with Training Data: {0:.2f}'.format(
+		np.sqrt(np.mean((reg.predict(X_train) - y_train) ** 2))))
+	print('RMSE of Linear Regression Model with Testing Data: {0:.2f}'.format(
+		np.sqrt(np.mean((reg.predict(X_test) - y_test) ** 2))))
+	print('R2 Coefficient for Linear Regression Model with Training Data: {0:.3f}'.format(reg.score(X_train, y_train)))
+	print('R2 Coefficient for Linear Regression Model with Testing Data: {0:.3f}'.format(reg.score(X_test, y_test)))
 
-	data_list=[X_train, X_test, y_train, y_test, standardized_residuals, fitt]
+	data_list=[X_train, y_train, standardized_residuals, fitt, RMSE_Training, R2_Training, RMSE_Testing, R2_Testing]
 	return data_list
