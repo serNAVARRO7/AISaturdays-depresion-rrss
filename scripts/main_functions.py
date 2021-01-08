@@ -8,6 +8,9 @@ from sklearn.metrics import mean_squared_error
 from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 import statsmodels.api as sm
+#!pip install scipy
+from scipy import stats
+
 
 def printHistograms(data, pColor):
 	sns.set_style("white")
@@ -122,3 +125,46 @@ def repeatRegression(X_train,y_train, X_test, y_test, resultsummary):
 
 	data_list=[X_train, y_train, standardized_residuals, fitt, RMSE_Training, R2_Training, RMSE_Testing, R2_Testing]
 	return data_list
+
+
+
+def eliminateOutliers(X_train,y_train, standardized_residuals):
+
+	OutlierPos = X_train[standardized_residuals > 3].index.tolist()
+	OutlierNeg = X_train[standardized_residuals < -3].index.tolist()
+	Outliers = OutlierPos + OutlierNeg
+
+	data_train_withoutoutliers = X_train.drop(Outliers)
+	print(data_train_withoutoutliers.shape)
+
+	label_train_withoutoutliers = y_train.drop(Outliers)
+	print(label_train_withoutoutliers.shape)
+
+	print("Participantes Outliers Eliminados: {}".format(Outliers))
+
+	data_list=[X_train, y_train, standardized_residuals]
+	return data_list
+
+
+
+def residualAnalysis(fitt, standardized_residuals):
+
+	plt.figure(figsize=(12,4))
+
+	plt.subplot(1, 3, 1)
+	plt.scatter(fitt.predict(), standardized_residuals)
+	plt.xlabel('Prediccion', fontsize=10)
+	plt.ylabel('Residuo estandarizado', fontsize=10)
+	plt.title('Gráfica de Residuos', fontsize=12)
+
+	plt.subplot(1, 3, 3)
+	plt.hist(standardized_residuals)
+	plt.xlabel('Standardized Residuals', fontsize=10)
+	plt.ylabel('Frequency', fontsize=10)
+	plt.title('Histograma Residuos Estandarizados', fontsize=12)
+
+	plt.figure(figsize=(3.6,3.6))
+	stats.probplot(standardized_residuals, dist="norm", plot=plt)
+	plt.title("Normal Q-Q Plot")
+
+	plt.show()
