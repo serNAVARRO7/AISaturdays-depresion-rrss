@@ -130,9 +130,7 @@ def repeatRegression(X_train,y_train, X_test, y_test, resultsummary):
 
 def eliminateOutliers(X_train,y_train, standardized_residuals):
 
-	OutlierPos = X_train[standardized_residuals > 3].index.tolist()
-	OutlierNeg = X_train[standardized_residuals < -3].index.tolist()
-	Outliers = OutlierPos + OutlierNeg
+	Outliers = X_train[np.array((standardized_residuals > 3) | (standardized_residuals < -3))].index.tolist()
 
 	data_train_withoutoutliers = X_train.drop(Outliers)
 	print(data_train_withoutoutliers.shape)
