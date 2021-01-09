@@ -142,7 +142,7 @@ def eliminateOutliers(X_train,y_train, standardized_residuals):
 
 	print("Participantes Outliers Eliminados: {}".format(Outliers))
 
-	data_list=[X_train, y_train, standardized_residuals]
+	data_list=[data_train_withoutoutliers, label_train_withoutoutliers, standardized_residuals]
 	return data_list
 
 
