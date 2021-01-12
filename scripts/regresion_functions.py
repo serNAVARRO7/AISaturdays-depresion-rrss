@@ -12,6 +12,7 @@ from scipy import stats
 import scipy.stats as stats
 from scipy.stats import kstest
 
+
 # La función "printHistograms" genera los histogramas de todos los indicadores del estudio.
 # Útil para ver de forma gráfica, en un único vistazo, la distribución de los indicadores.
 
@@ -28,7 +29,7 @@ def printHistograms(data, pColor):
 
 def printMatrixDiagram(data):
 
-	g = sns.PairGrid(data, height=1.5)
+	g = sns.PairGrid(data, height=1.2, corner=True)
 	g.map_offdiag(sns.scatterplot)
 	g.map_offdiag(sns.regplot)
 	g.map_diag(plt.hist)
@@ -42,7 +43,9 @@ def printPearsonCorrelations(data):
 	corr = data.corr()
 	plt.figure(figsize = (10,10))
 	cmap = sns.diverging_palette(220, 10, as_cmap=True)
-	sns.heatmap(corr, xticklabels=corr.columns.values, yticklabels=corr.columns.values, annot=True, cmap=cmap, vmax=1, vmin=-1,center=0, square=True, 		linewidths=.5, cbar_kws={"shrink": .82})
+	np.tril(np.ones(corr.shape)).astype(np.bool)[0:5, 0:5]
+	corr2=corr.where(np.tril(np.ones(corr.shape)).astype(np.bool))
+	sns.heatmap(corr2, xticklabels=corr.columns.values, yticklabels=corr.columns.values, annot=True, cmap=cmap, vmax=1, vmin=-1,center=0, square=True, linewidths=.5, cbar_kws={"shrink": .82})
 	plt.title('Heatmap of Correlation Matrix')
 	plt.show()
 
@@ -50,7 +53,7 @@ def printPearsonCorrelations(data):
 # La función "calculateRegression" ajusta un modelo de regresión lineal.
 # Utiliza el método de estimación "backward", ya que a partir del modelo saturado con todas las variables independientes
 # disponibles, va eliminando, una a una, dichas variables cuyo p-value > alpha (baja capacidad explicativa).
-# La función utiliza un 80% de los datos para los ajustes, y reserva un 20% de los datos para las pruebas.
+# La función utiliza un 80% de los datos para los ajustes, y reserva un 20% de los datos para los testeos.
 # Además, calcula el RootMeanSquaresError (RMSE) y el Coeficiente de Determinación (R2) para todos los ajustes.
 
 def calculateRegression(data, label, resultsummary, alpha):
