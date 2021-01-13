@@ -35,7 +35,7 @@ def printMatrixDiagram(data):
 	g.map_diag(plt.hist)
 
 
-# La función "printPearsonCorrelations" genera un mapa de calor de las correlaciones de Pearson entre todos los indicadores del estudio 2 a 2.
+# La función "printPearsonCorrelations" genera un mapa de calor de las correlaciones de Pearson entre todos los indicadores del estudio.
 # Útil para ver, en un único vistazo, los indicadores que están más correlacionados entre ellos y si hay multicolinealidad.
 
 def printPearsonCorrelations(data):
@@ -54,7 +54,7 @@ def printPearsonCorrelations(data):
 # Utiliza el método de estimación "backward", ya que a partir del modelo saturado con todas las variables independientes
 # disponibles, va eliminando, una a una, dichas variables cuyo p-value > alpha (baja capacidad explicativa).
 # La función utiliza un 80% de los datos para los ajustes, y reserva un 20% de los datos para los testeos.
-# Además, calcula el RootMeanSquaresError (RMSE) y el Coeficiente de Determinación (R2) para todos los ajustes.
+# Además, calcula el RootMeanSquareError (RMSE) y el Coeficiente de Determinación (R2) para todos los ajustes.
 
 def calculateRegression(data, label, resultsummary, alpha):
 
@@ -110,7 +110,7 @@ def calculateRegression(data, label, resultsummary, alpha):
 
 
 # La función "eliminateOutliers" elimina los residuos estandarizados considerados "altos" (menores que -3 y mayores que +3),
-# de cara a realizar posteriormente nuevos ajustes sin estos datos que muchas veces distorcionan los resultados.
+# de cara a realizar posteriormente nuevos ajustes sin estos datos que muchas veces distorsionan los resultados.
 # La función imprime los datos eliminados, posibilitando un control de lo que se está eliminando.
 
 def eliminateOutliers(X_train, y_train, standardized_residuals):
@@ -129,7 +129,7 @@ def eliminateOutliers(X_train, y_train, standardized_residuals):
 
 # La función "repeatRegression" vuelve a ajustar el modelo de regresión lineal final ajustado en "calculateRegression",
 # ahora para los datos libres de "outliers".
-# Además, vuelve a calcular el RootMeanSquaresError (RMSE) y el Coeficiente de Determinación (R2).
+# Además, vuelve a calcular el RootMeanSquareError (RMSE) y el Coeficiente de Determinación (R2).
 
 def repeatRegression(X_train, y_train, X_test, y_test, resultsummary):
 
