@@ -8,11 +8,6 @@
       "schema": {
         "fields": [
           {
-            "name": "field1",
-            "type": "integer",
-            "format": "default"
-          },
-          {
             "name": "Participant",
             "type": "integer",
             "format": "default"
