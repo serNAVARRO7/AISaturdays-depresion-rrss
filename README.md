@@ -30,24 +30,16 @@ El proyecto *Facemood* propone usar estos datos para desarrollar un modelo predi
 Durante siete semanas, el equipo trabajó en el proyecto *Facemood* siguiendo el siguiente [plan de acción colaborativo](https://docs.google.com/spreadsheets/d/18FCTqPB3jZHNGhPPGIMsuiDSaqBj1YsWza4AiPS8J2w/edit?usp=sharing).
 
 ### Directorio
+>
+    .
+    ├── docs/              # Documentos, imágenes, y presentaciones de diapositivas usadas durante el desarrollo del proyecto.
+    ├── figures/           # Versión final de las figuras creadas.
+    ├── processed-data/    # Conjunto de datos utilizado para la construcción del modelo tal y como resulta del proceso de análisis exploratorio de los datos.
+    ├── raw-data/          # Copia del conjunto de datos tal y como fue obtenido de la fuente original (ver arriba).
+    ├── scripts/           # Conjuntos de código utilizados para las distintas fases del proyecto: análisis exploratorio de los datos, clustering, ANOVA de medidas repetidas y regresión, así como funciones básicas.
+    ├── datapackage.json   # Archivo JSON con la meta-información del conjunto de datos original.
+    ├── LICENSE
+    └── README.md
 
-- docs/
-
-Documentos, imágenes, y presentaciones de diapositivas utilizadas por el equipo durante el desarrollo del proyecto.
-- figures/
-
-Versión final de las figuras creadas.
--  processed-data/
-
-Conjunto de datos utilizado para la construcción del modelo tal y como resulta del proceso de análisis exploratorio de los datos (ver el correspondiente Jupyter Notebook en: [/scripts/EDA-depresion-rrss.ipynb](https://github.com/serNAVARRO7/AISaturdays-depresion-rrss/blob/main/scripts/EDA-depresion-rrss.ipynb)).
--  raw-data/
-
-Copia del conjunto de datos tal y como fue obtenido de la fuente original (ver arriba).
--  scripts/
-
-Conjuntos de código utilizados para las distintas fases del proyecto: análisis exploratorio de los datos, clustering, ANOVA de medidas repetidas y regresión, así como funciones básicas.
--  datapackage.json
-
-Archivo JSON con la meta-información del conjunto de datos original.
 
 *– Última actualización: 19-01-2021*
