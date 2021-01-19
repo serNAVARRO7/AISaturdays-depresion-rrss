@@ -1,7 +1,6 @@
 ![alt tag](https://github.com/serNAVARRO7/AISaturdays-depresion-rrss/blob/main/header.png)
 
-# Facemood: Uso de redes sociales y depresión
-## Proyecto final AI Saturdays Euskadi 2020
+# Proyecto final AI Saturdays Euskadi 2020
 
 [AI Saturdays](https://www.saturdays.ai/) (o AI6) es un movimiento comunitario y global, comprometido a promover la educación en Inteligencia Artificial a través de contenido de calidad y el rigor de las mejores universidades.
 
