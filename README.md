@@ -41,6 +41,3 @@ Durante siete semanas, el equipo trabajó en el proyecto *Facemood* siguiendo el
     ├── datapackage.json   # Archivo JSON con la meta-información del conjunto de datos original.
     ├── LICENSE
     └── README.md
-
-
-*– Última actualización: 19-01-2021*
