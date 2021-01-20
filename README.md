@@ -16,6 +16,8 @@ En este estudio, los investigadores analizaron si el uso pasivo de las redes soc
 
 El proyecto *Facemood* propone usar estos datos para desarrollar un modelo predictivo que ayude a identificar individuos en riesgo de sufrir una depresión.
 
+Para conocer más sobre el desarrollo del proyecto, consulta nuestro [post](https://medium.com/saturdays-ai/an%C3%A1lisis-de-depresi%C3%B3n-en-redes-sociales-una-aplicaci%C3%B3n-en-bioestad%C3%ADstica-3d276738ad33) en Medium.
+
 ### Miembros del equipo
 
 - Henry Corazza
